@@ -13,14 +13,25 @@ public class Token {
                     return false;
             }
         }
+
+        public boolean isString() {
+            switch(this) {
+                case IDENTIFIER:
+                    return true;
+                default:
+                    return false;
+            }
+        }
     }
 
     private TokenType type;
     private double value;
+    private String var;
 
     public Token() {
         this.type = TokenType.NONE;
         this.value = Double.NaN;
+        this.var = null;
     }
 
     public Token(double value) {
@@ -31,10 +42,20 @@ public class Token {
     public Token(TokenType type) {
 		this.type = type;
 		this.value = Double.NaN;
+        this.var = null;
 	}
+
+    public Token(String var) {
+        this.type = TokenType.IDENTIFIER;
+        this.var = var;
+    }
 
     public boolean isNumber() {
         return type.isNumber();
+    }
+
+    public boolean isString() {
+        return type.isString();
     }
 
     public TokenType getType() {
@@ -43,6 +64,10 @@ public class Token {
 
     public Optional<Double> getValue() {
         return this.isNumber() ? Optional.of(value) : Optional.empty();
+    }
+
+    public String getString() {
+        return this.isString() ? var : null;
     }
 
     public static TokenType typeOf(char symbol) {
@@ -89,6 +114,8 @@ public class Token {
         switch (this.type) {
             case NUMBER:
                 return getValue().get().toString();
+            case IDENTIFIER:
+                return getString().toString();
             case PLUS:
                 return "+";
             case MINUS:
