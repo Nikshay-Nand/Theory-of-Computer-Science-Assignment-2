@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import static sun.jvm.hotspot.oops.CellTypeState.top;
+
 public class ParsingAlgo {
 
 //making the constructor that's gonna take the valueint it and initialise the token.
@@ -18,7 +20,7 @@ public class ParsingAlgo {
 
     //making a method that will take the token and run on it and will make the parse table.
 
-    public Stack<String> parse_the_token(List<Token> tokens) throws Exception {
+    public ArrayList<Object> parse_the_token(List<Token> tokens) throws Exception {
         //the code implementation of the parse tree.
         //making the tree.
         //the parsetree will be containing a nested list inside of the main list that being said, the
@@ -44,7 +46,7 @@ public class ParsingAlgo {
 
             //checking if the given value is terminal or not.
             //if the value is terminal then remove it from the list and then pass it to the tree
-            if(checkStackTop(this.stack.pop())){
+            if(checkStackTop(firstout){
                 //then add the value to the tree and then pass the code further.
                 for(Token t : tokens){
                     if(t.TokenType().toString().equals(firstout)){
@@ -52,6 +54,9 @@ public class ParsingAlgo {
                     }
                 }
                 index++;
+            }
+            if(firstout.equals("$")){
+                return parseTree;
             }
             else {
                 //getting theterminal value out of the non-terminal value.

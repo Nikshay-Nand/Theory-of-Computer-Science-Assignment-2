@@ -7,7 +7,7 @@ public class ImplementedParseTable {
 
 
     //the Hshmap templae which will store each rule with non-terminal value, terminal value and al the values it can change to.
-    private final Map<String , Map<Token.TokenType , List<String>>> tableRule = new HashMap<>();
+    private static final Map<String , Map<Token.TokenType , List<String>>> tableRule = new HashMap<>();
 
     public void  NTerminalToTerminal(){
         tableRule.put("expr" , new HashMap<>());
