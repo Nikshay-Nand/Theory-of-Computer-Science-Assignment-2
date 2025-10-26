@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import static sun.jvm.hotspot.oops.CellTypeState.top;
+//import static sun.jvm.hotspot.oops.CellTypeState.top;
 
 public class ParsingAlgo {
 
@@ -46,11 +46,11 @@ public class ParsingAlgo {
 
             //checking if the given value is terminal or not.
             //if the value is terminal then remove it from the list and then pass it to the tree
-            if(checkStackTop(firstout){
+            if(checkStackTop(firstout)){
                 //then add the value to the tree and then pass the code further.
                 for(Token t : tokens){
-                    if(t.TokenType().toString().equals(firstout)){
-                        parseTree.add(t.TokenType());
+                    if(t.getType().toString().equals(firstout)){
+                        parseTree.add(t.getType());
                     }
                 }
                 index++;
@@ -96,7 +96,7 @@ public class ParsingAlgo {
 
         }
 
-
+    return parseTree;
     }
 
     // LAMBDA, LET, LPAREN, RPAREN, NONE
