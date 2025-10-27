@@ -4,8 +4,8 @@ import java.util.List;
 // Run lexer first, then parser (they need to be separate functions)
 
 public class LexerParserAnalyser {
-    public static List<Token> analyse(String input) throws NumberException, IdentifierException, ExpressionException {
-        List<Token> tokens = new ArrayList<>();
+    public static ArrayList<Token> analyse(String input) throws NumberException, IdentifierException, ExpressionException {
+        ArrayList<Token> tokens = new ArrayList<>();
         String buffer = "";
         int state = 0;
         char[] symbol = {'+', '-', '*', '=', '?', 'λ', '≜', '(', ')'};
@@ -20,11 +20,16 @@ public class LexerParserAnalyser {
                     state = 1;
                     break;
                 }
+
+                //checkign ig the given value is a lambda or not?
+
                 else if (Character.isLetter(input.charAt(i))) {
                     buffer = buffer + input.charAt(i);
                     state = 2;
                     break;
                 }
+
+
 
                 // if the character is equals to any symbol '+', '-', '*', '=', '?', 'λ', '≜', '(', ')'
                 // add the type of the symbol to the token list.

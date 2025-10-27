@@ -24,6 +24,11 @@ public class Token {
         }
     }
 
+    //getting the value of the token.
+    public String getVar(){
+        return this.var;
+    }
+
     private TokenType type;
     private double value;
     private String var;
@@ -46,7 +51,13 @@ public class Token {
 	}
 
     public Token(String var) {
-        this.type = TokenType.IDENTIFIER;
+        if(!var.equals("λ")){
+            this.type = TokenType.IDENTIFIER;
+        }
+        if(var.equals("λ")){
+            this.type = TokenType.LAMBDA;
+        }
+
         this.var = var;
     }
 
@@ -102,7 +113,7 @@ public class Token {
 		case '9':
 			return TokenType.NUMBER;
 		default:
-            if (Character.isLetter(symbol)) {
+            if (Character.isLetter(symbol) && symbol!= 'λ') {
                 return TokenType.IDENTIFIER;
             }
 			return TokenType.NONE;
