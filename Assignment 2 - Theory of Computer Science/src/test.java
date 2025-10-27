@@ -19,7 +19,7 @@ public class test {
                     "x a b",
 
                     //deriving expr into (NUMBER)
-                    "(1)",  //suposed to fail.
+                    "(1)",  //supposed to fail.
                     "(10)", //supposed to fail
                     "(123345)", //supposed to fail
                     "(1 2)",

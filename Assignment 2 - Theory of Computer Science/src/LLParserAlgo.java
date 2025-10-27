@@ -104,7 +104,7 @@ public class LLParserAlgo {
 
 
 //
-                System.out.println("Token "+ tokens.get(index) + " type of the token "+ tokens.get(index).getType().toString() );
+//                System.out.println("Token "+ tokens.get(index) + " type of the token "+ tokens.get(index).getType().toString() );
 
 
             }
