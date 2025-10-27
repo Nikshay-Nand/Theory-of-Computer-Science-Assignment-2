@@ -31,7 +31,7 @@ public class LLParserAlgo {
         this.stack.push("$");
         this.stack.push("expr");
 
-        while(this.stack.size() > 0) {
+        while(this.stack.size() > 0 ) {
             String top = (String) this.stack.pop();
             if(checkStackTop(top)) {
 
@@ -62,186 +62,51 @@ public class LLParserAlgo {
                 //get all theproductino rules
                 Map<String, Map<String, ArrayList<String>>> ProductionRules = ImplementedParseTable.getTableRule();
                 Map<String, ArrayList<String>> ProductionRule = ProductionRules.get(top);
+//                ArrayList<String> theRule = new ArrayList<>();
                 if (ProductionRule == null) {
                     throw new Exception("No rules found for non-terminal: " + top);
                 }
-//                System.out.println(ProductionRule);
+//
 
-                //out of all the production rules, which will be used to derive the expr or paren-expr.
-//                if(tokens.get(index).getType().toString().equals("LAMBDA")) {
-//                    ArrayList<String> theRule = ProductionRule.get("LAMBDA");
+
+                //trying to get the rule if the next value ia number or an identifier (basically an expr)
+                if(tokens.get(index).getType().toString().equals("NUMBER") &&
+                        top.equals("paren-expr")
+                        || tokens.get(index).getType().toString().equals("IDENTIFIER") && top.equals("paren-expr")) {
+                    ArrayList<String> theRule = ProductionRule.get("expr");
+                    if (theRule == null) {
 //
-//                    if (theRule == null) {
+                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
 //
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
-//
-//
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("NUMBER")) {
-//                    ArrayList<String> theRule = ProductionRule.get("NUMBER");
-//
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
+                    }
 //
 //
+                    for(int i = theRule.size() - 1; i >= 0; i--) {
+
+                    System.out.println(theRule.get(i));
+                        this.stack.push(theRule.get(i));
+                    }
+                }
+                else {
+                    ArrayList<String> theRule = ProductionRule.get(tokens.get(index).getType().toString());
+                    if (theRule == null) {
 //
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("IDENTIFIER")) {
-//                    ArrayList<String> theRule = ProductionRule.get("IDENTIFIER");
+                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
 //
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
+                    }
 //
 //
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("LPAREN")) {
-//                    ArrayList<String> theRule = ProductionRule.get("LPAREN");
-//
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
-//
-//
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-////
-//                if(tokens.get(index).getType().toString().equals("PLUS")) {
-//                    ArrayList<String> theRule = ProductionRule.get("PLUS");
-//
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
-//
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("MINUS")) {
-//                    ArrayList<String> theRule = ProductionRule.get("MINUS");
-//
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
-//
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-////                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("MULT")) {
-//                    ArrayList<String> theRule = ProductionRule.get("MULT");
-//
-//                    if (theRule == null) {
-//
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-//                    }
-//
-////
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
+                    for(int i = theRule.size() - 1; i >= 0; i--) {
 //                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("EQUALS")) {
-//                    ArrayList<String> theRule = ProductionRule.get("EQUALS");
-////
-//                    if (theRule == null) {
-////
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-////
-//                    }
-////
-////
-////
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-//                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("CONDITIONAL")) {
-//                    ArrayList<String> theRule = ProductionRule.get("CONDITIONAL");
-////
-//                    if (theRule == null) {
-////
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-////
-//                    }
-////
-////
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-//                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//                if(tokens.get(index).getType().toString().equals("LET")) {
-//                    ArrayList<String> theRule = ProductionRule.get("LET");
-////
-//                    if (theRule == null) {
-////
-//                        throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-////
-//                    }
-////
-////
-//
-//                    for(int i = theRule.size() - 1; i >= 0; i--) {
-//                    System.out.println(theRule.get(i));
-//                        this.stack.push(theRule.get(i));
-//                    }
-//                }
-//
-                 ArrayList<String> theRule = ProductionRule.get(tokens.get(index).getType().toString());
+                        this.stack.push(theRule.get(i));
+                    }
+                }
+
 
 //
                 System.out.println("Token "+ tokens.get(index) + " type of the token "+ tokens.get(index).getType().toString() );
 
-                if (theRule == null) {
-//
-                    throw new Exception("No rule for (" + top + ", " + tokens.get(index).getType() + ") returntoken was"+ returnTokens);
-//
-                }
-//
-//
-                for(int i = theRule.size() - 1; i >= 0; i--) {
-//                    System.out.println(theRule.get(i));
-                    this.stack.push(theRule.get(i));
-                }
+
             }
         }
         return returnTokens;
